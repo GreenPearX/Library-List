@@ -1,0 +1,104 @@
+static void Main(string[] args)
+        {
+            List<Books> library = new List<Books>();
+            library.Add(new BookOfFacts("Space", "Carl Sagan", 150, true, 8));
+            library.Add(new ChildBook("Skogsmus", "Astrid Lindgren", 98, true, true));
+            library.Add(new EnterTainment("Future", "Hoopkins", 210, false, true));
+
+            foreach(Books b in library)
+            {
+                Console.WriteLine("Titel: " + b.Titel);
+                Console.WriteLine("Arthur: " + b.Arthur);
+                Console.WriteLine("Pages: " + b.Pages);
+                b.Move();
+                if (b is BookOfFacts)
+                {
+                    Console.WriteLine("Astronomy: Is this real science? " + ((BookOfFacts)b).Astronomy);
+                    Console.WriteLine("Planets: Do we really have " + ((BookOfFacts)b).Planets +  " planets?");
+
+                }
+                if (b is ChildBook)
+                {
+                    Console.WriteLine("Is it a Child book for younger then 10 years old?: " + ((ChildBook)b).ChildrenBook);
+                    Console.WriteLine("Is it a Child book with pictures?: " + ((ChildBook)b).PictureBook);
+                }
+                if (b is EnterTainment)
+                {
+                    Console.WriteLine("Is it based on a true story?: " + ((EnterTainment)b).SciFi);
+                    Console.WriteLine("Is it a Novel?: " + ((EnterTainment)b).Novel);
+                }
+                Console.WriteLine();
+            }
+            Console.ReadLine();
+        }
+
+
+    }
+    public class Books
+    {
+        public string Titel { get; set; }
+        public string Arthur { get; set; }
+        public int Pages { get; set; }
+        public virtual void Move()
+        {
+            Console.WriteLine("");
+        }
+
+    }
+
+    public class BookOfFacts : Books
+    {
+        public bool Astronomy { get; set; }
+        public int Planets { get; set; }
+
+        public BookOfFacts(string titel, string arthur, int pages, bool astronomy, int planets)
+        {
+            Titel = titel;
+            Arthur = arthur;
+            Pages = pages;
+            Astronomy = astronomy;
+            Planets = planets;
+        }
+        public override void Move()
+        {
+            Console.WriteLine("There is no limits in space! or is there?");
+            Console.WriteLine("Is there a planet X?");
+        }
+    }
+    public class ChildBook : Books
+    {
+        public bool ChildrenBook { get; set; }
+        public bool PictureBook { get; set; }
+
+        public ChildBook(string titel, string arthur, int pages, bool childrenbook, bool picturebook)
+        {
+            Titel = titel;
+            Arthur = arthur;
+            Pages = pages;
+            ChildrenBook = childrenbook;
+            PictureBook = picturebook;
+        }
+        public override void Move()
+        {
+            Console.WriteLine("Childe book for 8 years old");
+            Console.WriteLine("Its a picture book with story telling");
+        }
+    }
+    public class EnterTainment : Books
+    {
+        public bool SciFi { get; set; }
+        public bool Novel { get; set; }
+
+        public EnterTainment(string titel, string arthur, int pages, bool scifi, bool novel)
+        {
+            Titel = titel;
+            Arthur = arthur;
+            Pages = pages;
+            SciFi = scifi;
+            Novel = novel;
+        }
+        public override void Move()
+        {
+            Console.WriteLine("Its science fiction");
+            Console.WriteLine("First ever made Novel book!");
+        }
